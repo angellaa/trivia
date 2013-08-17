@@ -138,6 +138,11 @@ namespace UglyTrivia
 
         private void WriteQuestionToConsole()
         {
+            var questions = new Dictionary<string, LinkedList<string>>()
+            {
+                { RockCategory, rockQuestions },
+
+            };
             CheckPlayerIsOnPop();
             CheckPlayerIsOnScience();
             CheckPlayerIsOnSports();
