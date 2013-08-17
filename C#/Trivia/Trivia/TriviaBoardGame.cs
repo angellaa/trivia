@@ -149,6 +149,7 @@ namespace UglyTrivia
                 { SportsCategory, sportsQuestions }
             };
 
+            
             CheckPlayerIsOnPop();
             CheckPlayerIsOnScience();
             CheckPlayerIsOnSports();
