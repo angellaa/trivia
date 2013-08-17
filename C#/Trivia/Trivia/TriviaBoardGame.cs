@@ -187,11 +187,14 @@ namespace UglyTrivia
 
             if (IsPopPlace(place)) return "Pop";
             if (IsSciencePlace(place)) return "Science";
-            if (place == 2) return "Sports";
-            if (place == 6) return "Sports";
-            if (place == 10) return "Sports";
+            if (IsSportsPlace(place)) return "Sports";
 
             return "Rock";
+        }
+
+        private static bool IsSportsPlace(int place)
+        {
+            return place == 2 || place == 6 || place == 10;
         }
 
         private static bool IsPopPlace(int place)
