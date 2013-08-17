@@ -98,12 +98,6 @@ namespace UglyTrivia
                     outputWriter.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
 
                     MovePlayerForward(roll);
-
-                    outputWriter.WriteLine(playerNames[currentPlayer]
-                            + "'s new location is "
-                            + boardPlaces[currentPlayer]);
-                    outputWriter.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
-                    WriteQuestionToConsole();
                 }
                 else
                 {
@@ -114,12 +108,6 @@ namespace UglyTrivia
             else
             {
                 MovePlayerForward(roll);
-
-                outputWriter.WriteLine(playerNames[currentPlayer]
-                        + "'s new location is "
-                        + boardPlaces[currentPlayer]);
-                outputWriter.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
-                WriteQuestionToConsole();
             }
         }
 
@@ -130,6 +118,12 @@ namespace UglyTrivia
 
             if (passedTheEndOfTheBoard)
                 boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
+
+            outputWriter.WriteLine(playerNames[currentPlayer]
+                    + "'s new location is "
+                    + boardPlaces[currentPlayer]);
+            outputWriter.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
+            WriteQuestionToConsole();
         }
 
         private void WriteQuestionToConsole()
