@@ -194,27 +194,7 @@ namespace UglyTrivia
 
             var module = ModulePlace(place);
 
-
-            if (IsPopPlace(place)) return "Pop";
-            if (IsSciencePlace(place)) return "Science";
-            if (IsSportsPlace(place)) return "Sports";
-
-            return "Rock";
-        }
-
-        private static bool IsSportsPlace(int place)
-        {
-            return ModulePlace(place) == 2;
-        }
-
-        private static bool IsPopPlace(int place)
-        {
-            return ModulePlace(place) == 0;
-        }
-
-        private static bool IsSciencePlace(int place)
-        {
-            return ModulePlace(place) == 1;
+            return categories[module];
         }
 
         private static int ModulePlace(int place)
