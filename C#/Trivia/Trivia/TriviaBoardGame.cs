@@ -202,12 +202,7 @@ namespace UglyTrivia
             {
                 if (isGettingOutOfPenaltyBox)
                 {
-                    outputWriter.WriteLine("Answer was correct!!!!");
-                    playerScores[currentPlayer]++;
-                    outputWriter.WriteLine(playerNames[currentPlayer]
-                            + " now has "
-                            + playerScores[currentPlayer]
-                            + " Gold Coins.");
+                    CurrentStatus();
 
                     winner = CurrentPlayerHasWon();
                     
@@ -233,6 +228,16 @@ namespace UglyTrivia
             if (currentPlayer == playerNames.Count) currentPlayer = 0;
 
             return winner;
+        }
+
+        private void CurrentStatus()
+        {
+            outputWriter.WriteLine("Answer was correct!!!!");
+            playerScores[currentPlayer]++;
+            outputWriter.WriteLine(playerNames[currentPlayer]
+                                   + " now has "
+                                   + playerScores[currentPlayer]
+                                   + " Gold Coins.");
         }
 
         private void ChangeCurrentPlayer()
