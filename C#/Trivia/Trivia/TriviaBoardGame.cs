@@ -13,6 +13,9 @@ namespace UglyTrivia
         private const int MinimumPlayers = 2;
         private const int NumberOfPlaces = 12;
         private const string RockCategory = "Rock";
+        private const string PopCategory = "Pop";
+        private const string SportCategory = "Sport";
+
 
         List<string> playerNames = new List<string>();
 
