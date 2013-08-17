@@ -15,9 +15,9 @@ namespace Trivia
 
         private static bool notAWinner;
 
-        public static void Main(String[] args)
+        public static void Main(String[] args, IOutputWriter outputWriter)
         {
-            TriviaBoardGame aTriviaBoardGame = new TriviaBoardGame();
+            TriviaBoardGame aTriviaBoardGame = new TriviaBoardGame(outputWriter);
 
             aTriviaBoardGame.AddPlayer("Chet");
             aTriviaBoardGame.AddPlayer("Pat");
@@ -44,7 +44,11 @@ namespace Trivia
             } while (notAWinner);
 
         }
-    }
 
+        public static void Main(String[] args)
+        {
+            Main(args, new ConsoleOutputWriter());
+        }
+    }
 }
 

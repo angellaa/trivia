@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Trivia;
 
 namespace UglyTrivia
 {
@@ -24,11 +25,19 @@ namespace UglyTrivia
         LinkedList<string> sportsQuestions = new LinkedList<string>();
         LinkedList<string> rockQuestions = new LinkedList<string>();
 
+        private IOutputWriter outputWriter;
+
         int currentPlayer;
         bool isGettingOutOfPenaltyBox;
 
-        public TriviaBoardGame()
+        public TriviaBoardGame() : this(new ConsoleOutputWriter())
         {
+        }
+
+        public TriviaBoardGame(IOutputWriter outputWriter)
+        {
+            this.outputWriter = outputWriter;
+
             for (int i = 0; i < NumberOfQuestionsPerCategory; i++)
             {
                 popQuestions.AddLast("Pop Question " + i);
@@ -52,8 +61,8 @@ namespace UglyTrivia
         {
             playerNames.Add(playerName);
 
-            Console.WriteLine(playerName + " was added");
-            Console.WriteLine("They are player number " + playerNames.Count);
+            outputWriter.WriteLine(playerName + " was added");
+            outputWriter.WriteLine("They are player number " + playerNames.Count);
             return true;
         }
 
@@ -64,8 +73,8 @@ namespace UglyTrivia
 
         public void MoveCurrentPlayerAndAskQuestionIfEndsOutsidePenaltyBox(int roll)
         {
-            Console.WriteLine(playerNames[currentPlayer] + " is the current player");
-            Console.WriteLine("They have rolled a " + roll);
+            outputWriter.WriteLine(playerNames[currentPlayer] + " is the current player");
+            outputWriter.WriteLine("They have rolled a " + roll);
 
             if (playerIsInPenaltyBox[currentPlayer])
             {
@@ -73,20 +82,20 @@ namespace UglyTrivia
                 {
                     isGettingOutOfPenaltyBox = true;
 
-                    Console.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
+                    outputWriter.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
 
                     boardPlaces[currentPlayer] = boardPlaces[currentPlayer] + roll;
                     if (boardPlaces[currentPlayer] > NumberOfPlaces - 1) boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
 
-                    Console.WriteLine(playerNames[currentPlayer]
+                    outputWriter.WriteLine(playerNames[currentPlayer]
                             + "'s new location is "
                             + boardPlaces[currentPlayer]);
-                    Console.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
+                    outputWriter.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
                     WriteQuestionToConsole();
                 }
                 else
                 {
-                    Console.WriteLine(playerNames[currentPlayer] + " is not getting out of the penalty box");
+                    outputWriter.WriteLine(playerNames[currentPlayer] + " is not getting out of the penalty box");
                     isGettingOutOfPenaltyBox = false;
                 }
             }
@@ -95,10 +104,10 @@ namespace UglyTrivia
                 boardPlaces[currentPlayer] = boardPlaces[currentPlayer] + roll;
                 if (boardPlaces[currentPlayer] > NumberOfPlaces - 1) boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
 
-                Console.WriteLine(playerNames[currentPlayer]
+                outputWriter.WriteLine(playerNames[currentPlayer]
                         + "'s new location is "
                         + boardPlaces[currentPlayer]);
-                Console.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
+                outputWriter.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
                 WriteQuestionToConsole();
             }
         }
@@ -107,22 +116,22 @@ namespace UglyTrivia
         {
             if (CategoryForCurrentPlayersPlace() == "Pop")
             {
-                Console.WriteLine(popQuestions.First());
+                outputWriter.WriteLine(popQuestions.First());
                 popQuestions.RemoveFirst();
             }
             if (CategoryForCurrentPlayersPlace() == "Science")
             {
-                Console.WriteLine(scienceQuestions.First());
+                outputWriter.WriteLine(scienceQuestions.First());
                 scienceQuestions.RemoveFirst();
             }
             if (CategoryForCurrentPlayersPlace() == "Sports")
             {
-                Console.WriteLine(sportsQuestions.First());
+                outputWriter.WriteLine(sportsQuestions.First());
                 sportsQuestions.RemoveFirst();
             }
             if (CategoryForCurrentPlayersPlace() == "Rock")
             {
-                Console.WriteLine(rockQuestions.First());
+                outputWriter.WriteLine(rockQuestions.First());
                 rockQuestions.RemoveFirst();
             }
         }
@@ -149,9 +158,9 @@ namespace UglyTrivia
             {
                 if (isGettingOutOfPenaltyBox)
                 {
-                    Console.WriteLine("Answer was correct!!!!");
+                    outputWriter.WriteLine("Answer was correct!!!!");
                     playerScores[currentPlayer]++;
-                    Console.WriteLine(playerNames[currentPlayer]
+                    outputWriter.WriteLine(playerNames[currentPlayer]
                             + " now has "
                             + playerScores[currentPlayer]
                             + " Gold Coins.");
@@ -169,9 +178,9 @@ namespace UglyTrivia
                 return true;
             }
 
-            Console.WriteLine("Answer was corrent!!!!");
+            outputWriter.WriteLine("Answer was corrent!!!!");
             playerScores[currentPlayer]++;
-            Console.WriteLine(playerNames[currentPlayer]
+            outputWriter.WriteLine(playerNames[currentPlayer]
                               + " now has "
                               + playerScores[currentPlayer]
                               + " Gold Coins.");
@@ -185,8 +194,8 @@ namespace UglyTrivia
 
         public bool EndTurnWithWrongAnswerReturnHasntWon()
         {
-            Console.WriteLine("Question was incorrectly answered");
-            Console.WriteLine(playerNames[currentPlayer] + " was sent to the penalty box");
+            outputWriter.WriteLine("Question was incorrectly answered");
+            outputWriter.WriteLine(playerNames[currentPlayer] + " was sent to the penalty box");
             playerIsInPenaltyBox[currentPlayer] = true;
 
             currentPlayer++;
