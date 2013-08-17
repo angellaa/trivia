@@ -185,9 +185,7 @@ namespace UglyTrivia
         {
             int place = boardPlaces[currentPlayer];
 
-            if (place == 0) return "Pop";
-            if (place == 4) return "Pop";
-            if (place == 8) return "Pop";
+            if (IsPopPlace(place)) return "Pop";
             if (place == 1) return "Science";
             if (place == 5) return "Science";
             if (place == 9) return "Science";
@@ -196,6 +194,11 @@ namespace UglyTrivia
             if (place == 10) return "Sports";
 
             return "Rock";
+        }
+
+        private static bool IsPopPlace(int place)
+        {
+            return place == 0 || place == 4 || place == 8;
         }
 
         public bool EndTurnWithCorrectAnswerReturnHasntWon()
