@@ -138,16 +138,8 @@ namespace UglyTrivia
 
         private void WriteQuestionToConsole()
         {
-            if (CategoryForCurrentPlayersPlace() == "Pop")
-            {
-                outputWriter.WriteLine(popQuestions.First());
-                popQuestions.RemoveFirst();
-            }
-            if (CategoryForCurrentPlayersPlace() == "Science")
-            {
-                outputWriter.WriteLine(scienceQuestions.First());
-                scienceQuestions.RemoveFirst();
-            }
+            CheckPlayerIsOnPop();
+            CheckPlayerIsOnScience();
             if (CategoryForCurrentPlayersPlace() == "Sports")
             {
                 outputWriter.WriteLine(sportsQuestions.First());
@@ -157,6 +149,24 @@ namespace UglyTrivia
             {
                 outputWriter.WriteLine(rockQuestions.First());
                 rockQuestions.RemoveFirst();
+            }
+        }
+
+        private void CheckPlayerIsOnScience()
+        {
+            if (CategoryForCurrentPlayersPlace() == "Science")
+            {
+                outputWriter.WriteLine(scienceQuestions.First());
+                scienceQuestions.RemoveFirst();
+            }
+        }
+
+        private void CheckPlayerIsOnPop()
+        {
+            if (CategoryForCurrentPlayersPlace() == "Pop")
+            {
+                outputWriter.WriteLine(popQuestions.First());
+                popQuestions.RemoveFirst();
             }
         }
 
