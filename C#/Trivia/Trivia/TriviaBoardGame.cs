@@ -186,8 +186,7 @@ namespace UglyTrivia
 
                     winner = CurrentPlayerHasWon();
                     
-                    currentPlayer++;
-                    if (currentPlayer == playerNames.Count) currentPlayer = 0;
+                    ChangeCurrentPlayer();
 
                     return winner;
                 }
@@ -209,6 +208,12 @@ namespace UglyTrivia
             if (currentPlayer == playerNames.Count) currentPlayer = 0;
 
             return winner;
+        }
+
+        private void ChangeCurrentPlayer()
+        {
+            currentPlayer++;
+            if (currentPlayer == playerNames.Count) currentPlayer = 0;
         }
 
         public bool EndTurnWithWrongAnswerReturnHasntWon()
