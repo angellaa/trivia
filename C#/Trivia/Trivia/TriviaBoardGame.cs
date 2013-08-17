@@ -184,6 +184,13 @@ namespace UglyTrivia
         {
             int place = boardPlaces[currentPlayer];
 
+            Dictionary<int, string> categories = new Dictionary<int, string>()
+            {
+                {0, "Pop"},
+                {1, "Science"},
+                {2, "Sports"},
+            };
+
             if (IsPopPlace(place)) return "Pop";
             if (IsSciencePlace(place)) return "Science";
             if (IsSportsPlace(place)) return "Sports";
