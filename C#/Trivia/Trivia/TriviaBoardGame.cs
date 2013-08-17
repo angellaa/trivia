@@ -14,8 +14,8 @@ namespace UglyTrivia
         private const int NumberOfPlaces = 12;
         private const string RockCategory = "Rock";
         private const string PopCategory = "Pop";
-        private const string SportCategory = "Sport";
-
+        private const string SportsCategory = "Sports";
+        private const string ScienceCategory = "Science";
 
         List<string> playerNames = new List<string>();
 
@@ -144,8 +144,11 @@ namespace UglyTrivia
             var questions = new Dictionary<string, LinkedList<string>>()
             {
                 { RockCategory, rockQuestions },
-
+                { ScienceCategory, scienceQuestions},
+                { PopCategory, popQuestions },
+                { SportsCategory, sportsQuestions }
             };
+
             CheckPlayerIsOnPop();
             CheckPlayerIsOnScience();
             CheckPlayerIsOnSports();
