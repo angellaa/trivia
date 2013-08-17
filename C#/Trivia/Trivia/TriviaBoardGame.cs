@@ -119,9 +119,14 @@ namespace UglyTrivia
             if (passedTheEndOfTheBoard)
                 boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
 
+            WriteLocation();
+        }
+
+        private void WriteLocation()
+        {
             outputWriter.WriteLine(playerNames[currentPlayer]
-                    + "'s new location is "
-                    + boardPlaces[currentPlayer]);
+                                   + "'s new location is "
+                                   + boardPlaces[currentPlayer]);
             outputWriter.WriteLine("The category is " + CategoryForCurrentPlayersPlace());
             WriteQuestionToConsole();
         }
