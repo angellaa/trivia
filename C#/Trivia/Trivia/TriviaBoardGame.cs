@@ -216,7 +216,7 @@ namespace UglyTrivia
                 return true;
             }
 
-            outputWriter.WriteLine("Answer was corrent!!!!");
+            outputWriter.WriteLine("Answer was correct!!!!");
             playerScores[currentPlayer]++;
             outputWriter.WriteLine(playerNames[currentPlayer]
                               + " now has "
