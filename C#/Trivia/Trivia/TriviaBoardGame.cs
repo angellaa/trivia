@@ -222,22 +222,16 @@ namespace UglyTrivia
 
                     return winner;
                 }
-            
-                ChangePlayer();
+
+                ChangeCurrentPlayer();
                 return true;
             }
 
             CurrentStatus();
 
             winner = CurrentPlayerHasWon();
-            ChangePlayer();
+            ChangeCurrentPlayer();
             return winner;
-        }
-
-        private void ChangePlayer()
-        {
-            currentPlayer++;
-            if (currentPlayer == playerNames.Count) currentPlayer = 0;
         }
 
         private void CurrentStatus()
