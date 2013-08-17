@@ -256,8 +256,7 @@ namespace UglyTrivia
             outputWriter.WriteLine(playerNames[currentPlayer] + " was sent to the penalty box");
             playerIsInPenaltyBox[currentPlayer] = true;
 
-            currentPlayer++;
-            if (currentPlayer == playerNames.Count) currentPlayer = 0;
+            ChangeCurrentPlayer();
             return true;
         }
 
