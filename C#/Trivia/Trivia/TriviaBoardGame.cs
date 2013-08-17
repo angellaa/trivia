@@ -140,15 +140,25 @@ namespace UglyTrivia
         {
             CheckPlayerIsOnPop();
             CheckPlayerIsOnScience();
-            if (CategoryForCurrentPlayersPlace() == "Sports")
-            {
-                outputWriter.WriteLine(sportsQuestions.First());
-                sportsQuestions.RemoveFirst();
-            }
+            CheckPlayerIsOnSports();
+            CheckPlayerIsOnRock();
+        }
+
+        private void CheckPlayerIsOnRock()
+        {
             if (CategoryForCurrentPlayersPlace() == "Rock")
             {
                 outputWriter.WriteLine(rockQuestions.First());
                 rockQuestions.RemoveFirst();
+            }
+        }
+
+        private void CheckPlayerIsOnSports()
+        {
+            if (CategoryForCurrentPlayersPlace() == "Sports")
+            {
+                outputWriter.WriteLine(sportsQuestions.First());
+                sportsQuestions.RemoveFirst();
             }
         }
 
