@@ -183,15 +183,18 @@ namespace UglyTrivia
 
         private String CategoryForCurrentPlayersPlace()
         {
-            if (boardPlaces[currentPlayer] == 0) return "Pop";
-            if (boardPlaces[currentPlayer] == 4) return "Pop";
-            if (boardPlaces[currentPlayer] == 8) return "Pop";
-            if (boardPlaces[currentPlayer] == 1) return "Science";
-            if (boardPlaces[currentPlayer] == 5) return "Science";
-            if (boardPlaces[currentPlayer] == 9) return "Science";
-            if (boardPlaces[currentPlayer] == 2) return "Sports";
-            if (boardPlaces[currentPlayer] == 6) return "Sports";
-            if (boardPlaces[currentPlayer] == 10) return "Sports";
+            int place = boardPlaces[currentPlayer];
+
+            if (place == 0) return "Pop";
+            if (place == 4) return "Pop";
+            if (place == 8) return "Pop";
+            if (place == 1) return "Science";
+            if (place == 5) return "Science";
+            if (place == 9) return "Science";
+            if (place == 2) return "Sports";
+            if (place == 6) return "Sports";
+            if (place == 10) return "Sports";
+
             return "Rock";
         }
 
@@ -216,12 +219,7 @@ namespace UglyTrivia
                 return true;
             }
 
-            outputWriter.WriteLine("Answer was correct!!!!");
-            playerScores[currentPlayer]++;
-            outputWriter.WriteLine(playerNames[currentPlayer]
-                              + " now has "
-                              + playerScores[currentPlayer]
-                              + " Gold Coins.");
+            CurrentStatus();
 
             winner = CurrentPlayerHasWon();
             currentPlayer++;
