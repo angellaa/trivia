@@ -12,6 +12,7 @@ namespace UglyTrivia
         private const int NumberOfQuestionsPerCategory = 50;
         private const int MinimumPlayers = 2;
         private const int NumberOfPlaces = 12;
+        private const string RockCategory = "Rock";
 
         List<string> playerNames = new List<string>();
 
@@ -145,7 +146,7 @@ namespace UglyTrivia
 
         private void CheckPlayerIsOnRock()
         {
-            if (CategoryForCurrentPlayersPlace() == "Rock")
+            if (CategoryForCurrentPlayersPlace() == RockCategory)
             {
                 outputWriter.WriteLine(rockQuestions.First());
                 rockQuestions.RemoveFirst();
