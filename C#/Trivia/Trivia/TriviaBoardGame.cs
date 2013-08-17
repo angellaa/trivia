@@ -36,6 +36,10 @@ namespace UglyTrivia
 
         public TriviaBoardGame(IOutputWriter outputWriter)
         {
+
+            if (outputWriter == null)
+                throw new ArgumentNullException("outputWriter");
+
             this.outputWriter = outputWriter;
 
             for (int i = 0; i < NumberOfQuestionsPerCategory; i++)
@@ -57,8 +61,12 @@ namespace UglyTrivia
             return (GetNumberOfPlayers() >= MinimumPlayers);
         }
 
-        public bool AddPlayer(String playerName)
+        public bool AddPlayer(String playerName)    
         {
+
+            if (string.IsNullOrWhiteSpace(playerName))
+                throw new ArgumentNullException("playerName");
+
             playerNames.Add(playerName);
 
             outputWriter.WriteLine(playerName + " was added");
@@ -73,19 +81,27 @@ namespace UglyTrivia
 
         public void MoveCurrentPlayerAndAskQuestionIfEndsOutsidePenaltyBox(int roll)
         {
+            if (roll <= 0)
+                throw new ArgumentOutOfRangeException("roll", "Roll must be a positive number");
+
             outputWriter.WriteLine(playerNames[currentPlayer] + " is the current player");
             outputWriter.WriteLine("They have rolled a " + roll);
 
             if (playerIsInPenaltyBox[currentPlayer])
             {
-                if (roll % 2 != 0)
+                bool isOddRoll = roll % 2 != 0;
+
+                if (isOddRoll)
                 {
                     isGettingOutOfPenaltyBox = true;
 
                     outputWriter.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
 
                     boardPlaces[currentPlayer] = boardPlaces[currentPlayer] + roll;
-                    if (boardPlaces[currentPlayer] > NumberOfPlaces - 1) boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
+                    bool passedTheEndOfTheBoard = boardPlaces[currentPlayer] > NumberOfPlaces - 1;
+                    
+                    if (passedTheEndOfTheBoard) 
+                        boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
 
                     outputWriter.WriteLine(playerNames[currentPlayer]
                             + "'s new location is "
