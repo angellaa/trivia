@@ -89,25 +89,30 @@ namespace UglyTrivia
 
             if (playerIsInPenaltyBox[currentPlayer])
             {
-                bool isOddRoll = roll % 2 != 0;
-
-                if (isOddRoll)
-                {
-                    isGettingOutOfPenaltyBox = true;
-
-                    outputWriter.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
-
-                    MovePlayerForward(roll);
-                }
-                else
-                {
-                    outputWriter.WriteLine(playerNames[currentPlayer] + " is not getting out of the penalty box");
-                    isGettingOutOfPenaltyBox = false;
-                }
+                PlayInPenaltyBox(roll);
             }
             else
             {
                 MovePlayerForward(roll);
+            }
+        }
+
+        private void PlayInPenaltyBox(int roll)
+        {
+            bool isOddRoll = roll%2 != 0;
+
+            if (isOddRoll)
+            {
+                isGettingOutOfPenaltyBox = true;
+
+                outputWriter.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
+
+                MovePlayerForward(roll);
+            }
+            else
+            {
+                outputWriter.WriteLine(playerNames[currentPlayer] + " is not getting out of the penalty box");
+                isGettingOutOfPenaltyBox = false;
             }
         }
 
