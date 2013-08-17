@@ -9,31 +9,35 @@ namespace Trivia
 {
     public class GameRunner
     {
+        private const int MaximumRoll = 5;
+        private const int MinimumRoll = 1;
+        private const int WrongAnswer = 7;
+        private const int PossibleAnswers = 9;
 
         private static bool notAWinner;
 
         public static void Main(String[] args)
         {
-            Game aGame = new Game();
+            TriviaBoardGame aTriviaBoardGame = new TriviaBoardGame();
 
-            aGame.add("Chet");
-            aGame.add("Pat");
-            aGame.add("Sue");
+            aTriviaBoardGame.AddPlayer("Chet");
+            aTriviaBoardGame.AddPlayer("Pat");
+            aTriviaBoardGame.AddPlayer("Sue");
 
             Random rand = new Random();
 
             do
             {
 
-                aGame.roll(rand.Next(5) + 1);
+                aTriviaBoardGame.MoveCurrentPlayerAndAskQuestionIfEndsOutsidePenaltyBox(rand.Next(MaximumRoll) + MinimumRoll);
 
-                if (rand.Next(9) == 7)
+                if (rand.Next(PossibleAnswers) == WrongAnswer)
                 {
-                    notAWinner = aGame.wrongAnswer();
+                    notAWinner = aTriviaBoardGame.EndTurnWithWrongAnswerReturnHasntWon();
                 }
                 else
                 {
-                    notAWinner = aGame.wasCorrectlyAnswered();
+                    notAWinner = aTriviaBoardGame.EndTurnWithCorrectAnswerReturnHasntWon();
                 }
 
 
@@ -41,7 +45,6 @@ namespace Trivia
             } while (notAWinner);
 
         }
-
 
     }
 
