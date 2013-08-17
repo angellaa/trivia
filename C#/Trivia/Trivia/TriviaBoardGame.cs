@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace UglyTrivia
 {
@@ -25,7 +24,7 @@ namespace UglyTrivia
         LinkedList<string> sportsQuestions = new LinkedList<string>();
         LinkedList<string> rockQuestions = new LinkedList<string>();
 
-        int currentPlayer = 0;
+        int currentPlayer;
         bool isGettingOutOfPenaltyBox;
 
         public TriviaBoardGame()
@@ -51,12 +50,7 @@ namespace UglyTrivia
 
         public bool AddPlayer(String playerName)
         {
-
-
             playerNames.Add(playerName);
-            boardPlaces[GetNumberOfPlayers()] = 0;
-            playerScores[GetNumberOfPlayers()] = 0;
-            playerIsInPenaltyBox[GetNumberOfPlayers()] = false;
 
             Console.WriteLine(playerName + " was added");
             Console.WriteLine("They are player number " + playerNames.Count);
@@ -80,6 +74,7 @@ namespace UglyTrivia
                     isGettingOutOfPenaltyBox = true;
 
                     Console.WriteLine(playerNames[currentPlayer] + " is getting out of the penalty box");
+
                     boardPlaces[currentPlayer] = boardPlaces[currentPlayer] + roll;
                     if (boardPlaces[currentPlayer] > NumberOfPlaces - 1) boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
 
@@ -149,6 +144,7 @@ namespace UglyTrivia
 
         public bool EndTurnWithCorrectAnswerReturnHasntWon()
         {
+            bool winner;
             if (playerIsInPenaltyBox[currentPlayer])
             {
                 if (isGettingOutOfPenaltyBox)
@@ -160,34 +156,31 @@ namespace UglyTrivia
                             + playerScores[currentPlayer]
                             + " Gold Coins.");
 
-                    bool winner = CurrentPlayerHasWon();
+                    winner = CurrentPlayerHasWon();
+                    
                     currentPlayer++;
                     if (currentPlayer == playerNames.Count) currentPlayer = 0;
 
                     return winner;
                 }
-                else
-                {
-                    currentPlayer++;
-                    if (currentPlayer == playerNames.Count) currentPlayer = 0;
-                    return true;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Answer was corrent!!!!");
-                playerScores[currentPlayer]++;
-                Console.WriteLine(playerNames[currentPlayer]
-                        + " now has "
-                        + playerScores[currentPlayer]
-                        + " Gold Coins.");
-
-                bool winner = CurrentPlayerHasWon();
+            
                 currentPlayer++;
                 if (currentPlayer == playerNames.Count) currentPlayer = 0;
-
-                return winner;
+                return true;
             }
+
+            Console.WriteLine("Answer was corrent!!!!");
+            playerScores[currentPlayer]++;
+            Console.WriteLine(playerNames[currentPlayer]
+                              + " now has "
+                              + playerScores[currentPlayer]
+                              + " Gold Coins.");
+
+            winner = CurrentPlayerHasWon();
+            currentPlayer++;
+            if (currentPlayer == playerNames.Count) currentPlayer = 0;
+
+            return winner;
         }
 
         public bool EndTurnWithWrongAnswerReturnHasntWon()

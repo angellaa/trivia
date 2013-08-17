@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using UglyTrivia;
 
 namespace Trivia
@@ -24,7 +23,7 @@ namespace Trivia
             aTriviaBoardGame.AddPlayer("Pat");
             aTriviaBoardGame.AddPlayer("Sue");
 
-            Random rand = new Random();
+            Random rand = args.Length != 0 ? new Random(args[0].GetHashCode()) : new Random();
 
             do
             {
@@ -45,7 +44,6 @@ namespace Trivia
             } while (notAWinner);
 
         }
-
     }
 
 }
