@@ -118,11 +118,10 @@ namespace UglyTrivia
 
         private void MovePlayerForward(int roll)
         {
-            boardPlaces[currentPlayer] = boardPlaces[currentPlayer] + roll;
-            bool passedTheEndOfTheBoard = boardPlaces[currentPlayer] > NumberOfPlaces - 1;
+            var newPlaceCalculator = new NewPlaceCalculator();
 
-            if (passedTheEndOfTheBoard)
-                boardPlaces[currentPlayer] = boardPlaces[currentPlayer] - NumberOfPlaces;
+            boardPlaces[currentPlayer] = newPlaceCalculator.CalculateNewPlace(boardPlaces[currentPlayer], roll,
+                NumberOfPlaces);
 
             WriteLocation();
         }

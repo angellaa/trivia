@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="GameRunnerTest.cs" />
     <Compile Include="IOutputWriter.cs" />
+    <Compile Include="NewPlaceCalculator.cs" />
     <Compile Include="TriviaBoardGame.cs" />
     <Compile Include="GameRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
