@@ -189,7 +189,11 @@ namespace UglyTrivia
                 {0, "Pop"},
                 {1, "Science"},
                 {2, "Sports"},
+                {3, "Rock"}
             };
+
+            var module = ModulePlace(place);
+
 
             if (IsPopPlace(place)) return "Pop";
             if (IsSciencePlace(place)) return "Science";
