@@ -193,17 +193,22 @@ namespace UglyTrivia
 
         private static bool IsSportsPlace(int place)
         {
-            return place == 2 || place == 6 || place == 10;
+            return ModulePlace(place) == 2;
         }
 
         private static bool IsPopPlace(int place)
         {
-            return place == 0 || place == 4 || place == 8;
+            return ModulePlace(place) == 0;
         }
 
         private static bool IsSciencePlace(int place)
         {
-            return place == 1 || place == 5 || place == 9;
+            return ModulePlace(place) == 1;
+        }
+
+        private static int ModulePlace(int place)
+        {
+            return place % 4;
         }
 
         public bool EndTurnWithCorrectAnswerReturnHasntWon()
